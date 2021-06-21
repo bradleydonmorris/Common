@@ -3,6 +3,7 @@
     Out-String;
 [String] $GITFetchURL = $GITRemoteShowOrigin.Split("`n")[1].Replace("  Fetch URL: ", "");
 Write-Host $("CAPing to " + $GITFetchURL);
+
 [String] $CommitMessage = [DateTime]::UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fffffffK") + "{@Identifier} - {@Action}";
 [String] $Output = git status --porcelain=v1 |
     Out-String;
