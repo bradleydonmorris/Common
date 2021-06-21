@@ -1,0 +1,59 @@
+2021-06-21 15:56:01.7277042Z (Bradley.Morris) - Commit and Push
+ M Columns.sql
+ M EntityNumber.sql
+ M ForeignKey.sql
+ M Index.sql
+ M README.md
+?? .vs/
+?? CAP.ps1
+?? SQLAgentScripting/
+
+2021-06-21 15:58:17.7252319Z (36WSP93 AAONINC\Bradley.Morris) - Commit and Push
+ M CAP.ps1
+
+2021-06-21 15:58:39.5459857Z (36WSP93:AAONINC\Bradley.Morris) - Commit and Push
+ M CAP.ps1
+
+2021-06-21 16:00:12.5176669Z (36WSP93:AAONINC\Bradley.Morris) - Commit and Push
+ M SQLAgentScripting/README.md
+
+2021-06-21 18:31:08.5028704Z (36WSP93:AAONINC\Bradley.Morris) - Commit and Push
+ M CAP.ps1
+?? PowerShell/
+
+2021-06-21 18:49:47.2854299Z (36WSP93:AAONINC\Bradley.Morris) - No Changes
+2021-06-21 18:57:31.5857220Z (36WSP93:AAONINC\Bradley.Morris) - Commit and Push
+ M CAP.log
+ M CAP.ps1
+
+2021-06-21 18:57:47.0949923Z (36WSP93:AAONINC\Bradley.Morris) - No Changes
+2021-06-21 18:58:09.7718215Z (36WSP93:AAONINC\Bradley.Morris) - Commit and Push
+ M CAP.log
+
+2021-06-21 18:59:00.1554969Z (36WSP93:AAONINC\Bradley.Morris) - Commit and Push
+ M CAP.ps1
+
+2021-06-21 19:00:00.3310410Z (36WSP93:AAONINC\Bradley.Morris) - Commit and Push
+ M CAP.ps1
+
+2021-06-21 19:00:48.0861505Z (36WSP93:AAONINC\Bradley.Morris) - Commit and Push
+ M CAP.ps1
+
+2021-06-21 19:07:03.9347164Z (36WSP93:AAONINC\Bradley.Morris) - Commit and Push
+ M CAP.ps1
+ M README.md
+
+2021-06-21 19:21:19.4933944Z (36WSP93:AAONINC\Bradley.Morris) - Commit and Push
+ M .gitignore
+ M README.md
+?? .vs/
+?? CAP.log
+?? CAP.ps1
+?? Columns.sql
+?? Docs/
+?? EntityNumber.sql
+?? ForeignKey.sql
+?? Index.sql
+?? PowerShell/
+?? SQLAgentScripting/
+

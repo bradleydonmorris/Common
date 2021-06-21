@@ -1,0 +1,8 @@
+{
+	"RemoteGITBranch": "master",
+	"Instances":
+	[
+		"SQLSERVER1",
+		"SQLSERVER2\\Accounting"
+	]
+}
