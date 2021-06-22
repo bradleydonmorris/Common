@@ -115,44 +115,6 @@ Function Get-RandomString()
     Return $ReturnValue
 }
 
-Function Get-RandomBase32String()
-{
-    #Cf: https://en.wikipedia.org/wiki/Base32
-    Param
-    (
-        [Parameter(Mandatory=$false)]
-        [System.Int32] $CharacterCount = 8
-    )
-    [System.String] $ReturnValue = [System.String]::Empty;
-
-    #Set the default if $CharacterGroups is not provided.
-    If ($CharacterGroups -eq $null)
-    {
-        $CharacterGroups = "Upper","Lower","Numbers","Special";
-    }
-    [System.Array] $ASCIICodes = @();
-    ForEach ($Group In $CharacterGroups)
-    {
-        [System.Array] $ASCIICode = @();
-        switch ($Group)
-        {
-            "Upper" { $ASCIICode = (65..90) }
-            "Lower" { $ASCIICode = (97..122) }
-            "Numbers" { $ASCIICode = (48..57) }
-            "Special" { $ASCIICode = (33..47)+(58..64)+(91..96)+(123..126) }
-        }
-
-        #Add current ASCIICode set to ASCIICodes used for password.
-        $ASCIICodes += $ASCIICode 
-    }
-    [System.Int32] $UpperBounds = ($ASCIICodes.Count-1)
-    For ($Loop = 1; $Loop -le $CharacterCount; $Loop ++)
-    {
-        $ReturnValue += [Char]$ASCIICodes[$(Get-Random -Minimum 0 -Maximum $UpperBounds)];
-    }
-    Return $ReturnValue
-}
-
 Function Get-RandomBaseString()
 {
     #Cf: https://datatracker.ietf.org/doc/html/rfc4648
