@@ -19,3 +19,21 @@
   Get-RandomBaseString -CharacterCount 32 -Base Base32;
   Get-RandomBaseString -CharacterCount 32 -Base Base64;
   ```
+
+- DateTimeFunctions.ps1
+  - Get-DateDouble
+  ```powershell
+  Get-DateDouble -DateTime $([DateTime]::UtcNow);
+  ```
+  - Get-TimeDouble
+  ```powershell
+  Get-TimeDouble -DateTime $([DateTime]::UtcNow);
+  ```
+  - Get-DateTimeDouble
+  ```powershell
+  Get-DateTimeDouble -DateTime $([DateTime]::UtcNow);
+  ```
+  - Get-ElapsedTime
+  ```powershell
+  Get-ElapsedTime -BeginTime $([DateTime]::UtcNow) -EndTime $([DateTime]::UtcNow.AddMilliseconds(998234578));
+  ```

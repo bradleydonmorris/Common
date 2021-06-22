@@ -1,20 +1,11 @@
-<#
-Clear-Host;
-
-[DateTime] $NowUTC = [DateTime]::UtcNow;
-ToDateDouble -dateTime $NowUTC
-ToTimeDouble -dateTime $NowUTC
-ToDateTimeDouble -dateTime $NowUTC
-#>
-
-Function ToDateDouble()
+Function Get-DateDouble()
 {
     Param
     (
-        [DateTime] $dateTime
+        [DateTime] $DateTime
     )
     [Double] $returnDouble = 0;
-    if (![Double]::TryParse($dateTime.ToString("yyyyMMdd"), [ref] $returnDouble))
+    if (![Double]::TryParse($DateTime.ToString("yyyyMMdd"), [ref] $returnDouble))
     {
         throw [ArgumentException]::new("Unable to pasre date to Double/Double.");
     }
@@ -30,14 +21,14 @@ Function ToDateDouble()
 		}
 #>
 
-Function ToTimeDouble()
+Function Get-TimeDouble()
 {
     Param
     (
-        [DateTime] $dateTime
+        [DateTime] $DateTime
     )
     [Double] $returnDouble = 0;
-	[TimeSpan] $timeSpan = ($dateTime - ([DateTime]::new($dateTime.Year, $dateTime.Month, $dateTime.Day, 0, 0, 0, 0, $dateTime.Kind)));
+	[TimeSpan] $timeSpan = ($DateTime - ([DateTime]::new($DateTime.Year, $DateTime.Month, $DateTime.Day, 0, 0, 0, 0, $DateTime.Kind)));
     if (![Double]::TryParse(("0." + $timeSpan.TotalMilliseconds.ToString("0000000")), [ref] $returnDouble))
     {
         throw [ArgumentException]::new("Unable to pasre date to Double/Double.");
@@ -56,20 +47,20 @@ Function ToTimeDouble()
 #>
 
 
-Function ToDateTimeDouble()
+Function Get-DateTimeDouble()
 {
     Param
     (
-        [DateTime] $dateTime
+        [DateTime] $DateTime
     )
     [Double] $returnDouble = 0;
     [Double] $dateDouble = 0;
     [Double] $timeDouble = 0;
-    if (![Double]::TryParse($dateTime.ToString("yyyyMMdd"), [ref] $dateDouble))
+    if (![Double]::TryParse($DateTime.ToString("yyyyMMdd"), [ref] $dateDouble))
     {
         throw [ArgumentException]::new("Unable to pasre date to Double/Double.");
     }
-	[TimeSpan] $timeSpan = ($dateTime - ([DateTime]::new($dateTime.Year, $dateTime.Month, $dateTime.Day, 0, 0, 0, 0, $dateTime.Kind)));
+	[TimeSpan] $timeSpan = ($DateTime - ([DateTime]::new($DateTime.Year, $DateTime.Month, $DateTime.Day, 0, 0, 0, 0, $DateTime.Kind)));
     if (![Double]::TryParse(($dateDouble.ToString("00000000") + "." + $timeSpan.TotalMilliseconds.ToString("0000000")), [ref] $returnDouble))
     {
         throw [ArgumentException]::new("Unable to pasre date to Double/Double.");

@@ -3,8 +3,8 @@
     Author: Bradley Don Morris
     Web Site: http://bradleydonmorris.me
 Usage:
-    Get-RandomPassword -PasswordLength 32 -CharacterGroups Upper,Lower,Numbers,Special -Weighting @{"Upper"= 5;"Lower"= 5;"Numbers"= 3;Special=1;} -ErrorAction Ignore
-    Get-RandomPassword -PasswordLength 32 -CharacterGroups Upper,Lower,Numbers -Weighting @{"Upper"= 5;"Lower"= 5;"Numbers"= 3;Special=0;} -ErrorAction Ignore
+Get-RandomPassword -PasswordLength 32 -CharacterGroups Upper,Lower,Numbers,Special -Weighting @{"Upper"= 5;"Lower"= 5;"Numbers"= 3;Special=1;} -ErrorAction Ignore
+Get-RandomPassword -PasswordLength 32 -CharacterGroups Upper,Lower,Numbers -Weighting @{"Upper"= 5;"Lower"= 5;"Numbers"= 3;Special=0;} -ErrorAction Ignore
 #>
 
 Function Get-RandomPassword()

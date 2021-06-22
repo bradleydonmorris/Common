@@ -94,3 +94,8 @@
 2021-06-22 14:59:06.3838957Z (Bradley.Morris@36WSP93) - Commit and Push
  M PowerShell/Functions/README.md
 
+2021-06-22 15:10:46.4319386Z (Bradley.Morris@36WSP93) - Commit and Push
+ M PowerShell/Functions/DateTimeFunctions.ps1
+ M PowerShell/Functions/README.md
+ M PowerShell/Functions/RandomStringFunctions.ps1
+
