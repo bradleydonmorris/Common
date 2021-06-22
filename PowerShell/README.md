@@ -1,6 +1,6 @@
-# Common \ PowerShell \ Functions
+# Common \ PowerShell
 
-[Common](https://github.com/bradleydonmorris/Common) \ PowerShellPowerShell
+[Common](https://github.com/bradleydonmorris/Common) \ PowerShell
 
 This is a private repository of SQL, PowerShell and other script that I use or reference regularly.
 
