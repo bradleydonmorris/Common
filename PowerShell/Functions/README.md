@@ -1,6 +1,6 @@
 # Common \ PowerShell \ Functions
 
-[Common](https://github.com/bradleydonmorris/Common) \ [PowerShell](https://github.com/bradleydonmorris/Common/PowerShell) \ Functions
+[Common](https://github.com/bradleydonmorris/Common) \ [PowerShell](https://github.com/bradleydonmorris/Common/tree/master/PowerShell) \ Functions
 
 - RandomStringFunctions.ps1
   - Get-RandomPassword
