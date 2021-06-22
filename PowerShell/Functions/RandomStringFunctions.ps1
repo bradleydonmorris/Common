@@ -121,11 +121,7 @@ Function Get-RandomBase32String()
     Param
     (
         [Parameter(Mandatory=$false)]
-        [System.Int32] $CharacterCount = 8,
-        
-        [Parameter(Mandatory=$false)]
-        [ValidateSet("Upper", "Lower", "Numbers", "Special")]
-        [String[]]$CharacterGroups
+        [System.Int32] $CharacterCount = 8
     )
     [System.String] $ReturnValue = [System.String]::Empty;
 
@@ -153,6 +149,36 @@ Function Get-RandomBase32String()
     For ($Loop = 1; $Loop -le $CharacterCount; $Loop ++)
     {
         $ReturnValue += [Char]$ASCIICodes[$(Get-Random -Minimum 0 -Maximum $UpperBounds)];
+    }
+    Return $ReturnValue
+}
+
+Function Get-RandomBaseString()
+{
+    #Cf: https://datatracker.ietf.org/doc/html/rfc4648
+    Param
+    (
+        [Parameter(Mandatory=$false)]
+        [System.Int32] $CharacterCount = 8,
+        
+        [Parameter(Mandatory=$false)]
+        [ValidateSet("Base16", "Base32", "Base64")]
+        [String] $Base = "Base32"
+
+    )
+    [System.String] $ReturnValue = [System.String]::Empty;
+    [System.Array] $Characters = @();
+    [Char[]] $Characters;
+    Switch ($Base)
+    {
+        "Base64" { $Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_".ToCharArray(); }
+        "Base32" { $Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567".ToCharArray(); }
+        "Base16" { $Characters = "0123456789ABCDEF".ToCharArray(); }
+    }
+    [System.Int32] $UpperBounds = ($Characters.Count-1)
+    For ($Loop = 1; $Loop -le $CharacterCount; $Loop ++)
+    {
+        $ReturnValue += $Characters[$(Get-Random -Minimum 0 -Maximum $UpperBounds)];
     }
     Return $ReturnValue
 }
