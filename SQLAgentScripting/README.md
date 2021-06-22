@@ -1,6 +1,6 @@
-# Scripts \ SQL Agent Scripting
+# Common \ SQL Agent Scripting
 
-[Scripts](https://github.com/bradleydonmorris/Scripts) \ SQL Agent Scripting
+[Common](https://github.com/bradleydonmorris/Common) \ SQL Agent Scripting
 
 - Script.ps1
 
