@@ -9,7 +9,7 @@ Write-Host $("CAPing to " + $GITFetchURL);
     Out-String;
 If ($Output.Length -gt 0)
 {
-    $CommitMessage = $CommitMessage.Replace("{@Action}", "Commit and Push");
+    $CommitMessage = $CommitMessage.Replace("{@Action}", "!CAP!");
     Add-Content -Path "CAP.log" -Value $CommitMessage.Replace("{@Identifier}", " (" + $env:USERNAME + "@" + $env:COMPUTERNAME + ")");
     Add-Content -Path "CAP.log" -Value $Output;
     git add . *>$null;
