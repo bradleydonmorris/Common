@@ -144,3 +144,21 @@ Function Get-RandomBaseString()
     }
     Return $ReturnValue
 }
+
+Function Get-RandomHexString()
+{
+    Param
+    (
+        [Parameter(Mandatory=$false)]
+        [System.Int32] $CharacterCount = 8
+    )
+    If($CharacterCount % 2 -eq 1 ) { $CharacterCount += 1; } 
+    [Int32] $LoopCount = $CharacterCount / 2;
+    [System.String] $ReturnValue = [System.String]::Empty;
+    [System.Int32] $UpperBounds = ($Characters.Count-1)
+    For ($Loop = 1; $Loop -le $LoopCount; $Loop ++)
+    {
+        $ReturnValue += [BitConverter]::ToString([Byte](Get-Random -Minimum 0 -Maximum 255));
+    }
+    Return $ReturnValue
+}

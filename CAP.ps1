@@ -14,7 +14,8 @@ If ($Output.Length -gt 0)
     Add-Content -Path "CAP.log" -Value $Output;
     git add . *>$null;
     git commit --message $CommitMessage.Replace("{@Identifier}", "") *>$null;
-    git push origin "master" -q *>$null
+    git push
+    # origin "release" -q *>$null
 }
 Else
 {
