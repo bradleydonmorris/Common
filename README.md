@@ -11,6 +11,16 @@ orep() {
 }
 ```
 
+Sample **/c/Users/$(whoami)/source/repos/.paths** file contents. Adjust as needed.
+```
+common=/c/Users/bradley.morris/source/repos/bradleydonmorris/Common
+bdmme=/c/Users/bradley.morris/source/repos/bradleydonmorris/BradleyDonMorris.me
+ghbdm=/c/Users/bradley.morris/source/repos/bradleydonmorris/bradleydonmorris
+jt=/c/Users/bradley.morris/source/repos/bradleydonmorris/JournalTemplate
+plm=/c/Users/bradley.morris/source/repos/PLM
+mfs=/c/Users/bradley.morris/source/repos/MainframeService
+```
+
 To make CAP.ps1 executable from Git Bash for Windows, add the following line to **C:\Users\\%username%\AppData\Local\Programs\Git\etc\profile.d\aliases.sh**.
 
 ```
