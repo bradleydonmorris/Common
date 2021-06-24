@@ -2,7 +2,7 @@
 
 This is a private repository of SQL, PowerShell and other script that I use or reference regularly.
 
-To create the **orep** and **lrep** functions, add the following line to **C:\Users\\%username%\AppData\Local\Programs\Git\etc\profile**
+To create the **orep**, **lrep**, and **arep** functions, add the following lines to **C:\Users\\%username%\AppData\Local\Programs\Git\etc\profile**
 
 ```
 orep() {
@@ -26,6 +26,17 @@ lrep() {
   echo
   echo 'To chanage to a repo directory use the following:'
   echo '  orep {Name}'
+}
+
+arep() {
+  repopath=$(awk -v FS="$1=" 'NF>1{print $2}' /c/Users/$(whoami)/source/repos/.paths)
+  if [ -z "${repopath}" ]
+  then
+    printf '%s=%s\n' $1 $PWD >> /c/Users/$(whoami)/source/repos/.paths
+    printf 'Adding\n\t%s=%s' $1 $PWD
+  else
+    printf '"%s" is already in use!' $1
+  fi
 }
 ```
 
