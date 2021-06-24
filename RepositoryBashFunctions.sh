@@ -19,6 +19,9 @@ lrep() {
   echo
   echo 'To chanage to a repo directory use the following:'
   echo '  orep {Name}'
+  echo
+  echo 'To add the current directory to .paths use the following:'
+  echo '  arep {Name}'
 }
 
 arep() {
