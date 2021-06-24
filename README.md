@@ -2,7 +2,7 @@
 
 This is a private repository of SQL, PowerShell and other script that I use or reference regularly.
 
-To create the **orep**, **lrep**, and **arep** functions, add the contents of **RepositoryBashFunctions.sh** to **C:\Users\\%username%\AppData\Local\Programs\Git\etc\profile**
+To create the **orep**, **lrep**, and **arep** functions, add the contents of [**RepositoryBashFunctions.sh**](https://github.com/bradleydonmorris/Common/blob/master/RepositoryBashFunctions.sh) to **C:\Users\\%username%\AppData\Local\Programs\Git\etc\profile**
 
 Sample **/c/Users/$(whoami)/source/repos/.paths** file contents. Adjust as needed.
 ```
