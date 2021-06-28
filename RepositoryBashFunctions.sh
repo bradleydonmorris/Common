@@ -35,7 +35,7 @@ arep() {
   fi
 }
 
-vsl() {
+vsrep() {
   devenv="/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/Common7/IDE/devenv.exe"
   solfile=${PWD##*/}".sln"
   if [ -f $solfile ]
@@ -44,4 +44,10 @@ vsl() {
   else
     "$devenv" "${PWD}" &
   fi
+}
+
+iisrep() {
+  iispath="/c/Program Files/IIS Express/iisexpress.exe"
+  siteName=${PWD##*/} 
+  "$iispath" -site:$siteName &
 }
