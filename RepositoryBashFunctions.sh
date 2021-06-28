@@ -34,3 +34,14 @@ arep() {
     printf '"%s" is already in use!' $1
   fi
 }
+
+vsl() {
+  devenv="/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/Common7/IDE/devenv.exe"
+  solfile=${PWD##*/}".sln"
+  if [ -f $solfile ]
+  then
+    "$devenv" "${PWD}/${solfile}" &
+  else
+    "$devenv" "${PWD}" &
+  fi
+}

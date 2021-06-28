@@ -2,7 +2,14 @@
 
 This is a private repository of SQL, PowerShell and other script that I use or reference regularly.
 
-To create the **orep**, **lrep**, and **arep** functions, add the contents of [**RepositoryBashFunctions.sh**](https://github.com/bradleydonmorris/Common/blob/master/RepositoryBashFunctions.sh) to **C:\Users\\%username%\AppData\Local\Programs\Git\etc\profile**
+To create the **orep**, **lrep**, **arep**, and **vsl** functions, add the contents of [**RepositoryBashFunctions.sh**](https://github.com/bradleydonmorris/Common/blob/master/RepositoryBashFunctions.sh) to **C:\Users\\%username%\AppData\Local\Programs\Git\etc\profile**.
+
+These command utilize the **.paths** file outlined below.
+
+1. **`orep bdmj`**: opens the repo directory specified in the **.paths** file with the provided alias. (bdmj in this case.)
+2. **`lrep`**: lists the contents of the **.paths** file formatted for display.
+3. **`arep myRepo`**: adds the current directory to the **.paths** with the provided alias. (myRepo in this case)
+4. **`vsl`**: opens Visual Studio. If a **.sln** file exists in the current directory named after the current directory, it will open that solution. Otherwise it will open the current directory.
 
 Sample **/c/Users/$(whoami)/source/repos/.paths** file contents. Adjust as needed.
 ```shell
