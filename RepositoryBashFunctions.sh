@@ -15,6 +15,9 @@ repo() {
 		echo
 		echo 'Launch IIS Express for the current directory:'
 		echo '  repo add {Name}'
+		echo
+		echo 'Commit and push the GIT repo in the current directory:'
+		echo '  repo cap [Message]'
 	else
 		if [ $1 == "open" ]
 		then
@@ -26,8 +29,8 @@ repo() {
 			repopath=$(awk -v fs="$2=" 'nf>1{print $2}' /c/users/$(whoami)/source/repos/.paths)
 			if [ -z "${repopath}" ]
 			then
-				printf '%s=%s\n' $2 $pwd >> /c/users/$(whoami)/source/repos/.paths
-				printf 'adding\n\t%s=%s' $2 $pwd
+				printf '%s=%s\n' $2 $PWD >> /c/users/$(whoami)/source/repos/.paths
+				printf 'adding\n\t%s=%s' $2 $PWD
 			else
 				printf '"%s" is already in use!' $2
 			fi
@@ -68,6 +71,23 @@ repo() {
 			iispath="/c/Program Files/IIS Express/iisexpress.exe"
 			siteName=${PWD##*/} 
 			"$iispath" -site:$siteName &
+		fi
+		if [ $1 == "cap" ]
+		then
+			commitMessage=$2
+			changeCount=$(git status --porcelain=v1 | wc -l)
+			if [ "$changeCount" != "0" ]
+			then
+				if [ -z "$commitMessage" ]
+				then
+					commitMessage=$(date --utc +"%Y-%m-%d %H:%M:%S.%N")" "$(whoami)", CAP Operation"
+				fi
+				git add .
+				git commit --message "$commitMessage"
+				git push
+			else
+				echo "No changes found."
+			fi
 		fi
 	fi
 }
