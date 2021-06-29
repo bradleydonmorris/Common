@@ -23,12 +23,6 @@ plm=/c/Users/bradley.morris/source/repos/PLM
 mfs=/c/Users/bradley.morris/source/repos/MainframeService
 ```
 
-To make CAP.ps1 executable from Git Bash for Windows, add the following lines to **C:\Users\\%username%\AppData\Local\Programs\Git\etc\profile.d\aliases.sh**.
-
-```shell
-alias cap='powershell -File /c/Users/$(whoami)/source/repos/bradleydonmorris/Common/CAP.ps1'
-```
-
 Additional aliases that may be needed...
 ```shell
 alias glg='git log --graph --full-history -10 --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
