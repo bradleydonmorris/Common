@@ -1,18 +1,23 @@
+#!/bin/bash
+
 repo() {
-	handled="false"
+	showUsage="false"
 	if [ $# -lt 1 ]
 	then
-		handled="false"
+		showUsage="false"
 	else
-		if [ $1 == "open" ]
+		if [ $1 == "help" ]
 		then
-			handled="true"
+			showUsage="false"
+		elif [ $1 == "open" ]
+		then
+			showUsage="true"
 			repopath=$(awk -v FS="$2=" 'NF>1{print $2}' /c/Users/$(whoami)/source/repos/.paths)
 			cd $repopath
 		fi
 		if [ $1 == "add" ]
 		then
-			handled="true"
+			showUsage="true"
 			repopath=$(awk -v fs="$2=" 'nf>1{print $2}' /c/users/$(whoami)/source/repos/.paths)
 			if [ -z "${repopath}" ]
 			then
@@ -24,7 +29,7 @@ repo() {
 		fi
 		if [ $1 == "list" ]
 		then
-			handled="true"
+			showUsage="true"
 			echo 'Name       Path'
 			echo '---------  --------------------------------------------------------------------------------------'
 			namepad='           '
@@ -45,7 +50,7 @@ repo() {
 		fi
 		if [ $1 == "vs" ]
 		then
-			handled="true"
+			showUsage="true"
 			devenv="/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/Common7/IDE/devenv.exe"
 			solfile=${PWD##*/}".sln"
 			if [ -f $solfile ]
@@ -57,14 +62,14 @@ repo() {
 		fi
 		if [ $1 == "iis" ]
 		then
-			handled="true"
+			showUsage="true"
 			iispath="/c/Program Files/IIS Express/iisexpress.exe"
 			siteName=${PWD##*/} 
 			"$iispath" -site:$siteName &
 		fi
 		if [ $1 == "cap" ]
 		then
-			handled="true"
+			showUsage="true"
 			commitMessage=$2
 			changeCount=$(git status --porcelain=v1 | wc -l)
 			if [ "$changeCount" != "0" ]
@@ -82,32 +87,36 @@ repo() {
 		fi
 		if [ $1 == "graph" ]
 		then
-			handled="true"
+			showUsage="true"
 			git log --graph --full-history -10 --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
 		fi
 	fi
-	if [ $handled == "false" ]
+	if [ $showUsage == "false" ]
 	then
-		echo '******Repo Functions Usage******'
-		echo 'List the directories in .paths.'
-		echo '  repo add {Name}'
 		echo
-		echo 'Chanage to a repo directory listed in .paths.'
-		echo '  repo open {Name}'
-		echo
-		echo 'Add the current directory to .paths.'
-		echo '  repo add {Name}'
-		echo
-		echo 'Launch Visual Studio for the current directory.'
-		echo '  repo add {Name}'
-		echo
-		echo 'Launch IIS Express for the current directory.'
-		echo '  repo add {Name}'
-		echo
-		echo 'Commit and push the GIT repo in the current directory.'
-		echo '  repo cap [Message]'
-		echo
-		echo 'Display commit graph of the GIT repo in the current directory.'
-		echo '  repo graph'
+		echo '***REPO FUNCTIONS USAGE*********************************************'
+		echo '*                                                                  *'
+		echo '*  List the directories in .paths.                                 *'
+		echo '*    repo list                                                     *'
+		echo '*                                                                  *'
+		echo '*  Chanage to a repo directory listed in .paths.                   *'
+		echo '*    repo open {Name}                                              *'
+		echo '*                                                                  *'
+		echo '*  Add the current directory to .paths.                            *'
+		echo '*    repo add {Name}                                               *'
+		echo '*                                                                  *'
+		echo '*  Launch Visual Studio for the current directory.                 *'
+		echo '*    repo add {Name}                                               *'
+		echo '*                                                                  *'
+		echo '*  Launch IIS Express for the current directory.                   *'
+		echo '*    repo add {Name}                                               *'
+		echo '*                                                                  *'
+		echo '*  Commit and push the GIT repo in the current directory.          *'
+		echo '*    repo cap [Message]                                            *'
+		echo '*                                                                  *'
+		echo '*  Display commit graph of the GIT repo in the current directory.  *'
+		echo '*    repo graph                                                    *'
+		echo '*                                                                  *'
+		echo '********************************************************************'
 	fi
 }

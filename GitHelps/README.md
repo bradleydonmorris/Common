@@ -1,14 +1,10 @@
-# Common
+# Common \ PowerShell
 
-This is a private repository of SQL, PowerShell, Git Bash, and other script that I use or reference regularly.
+[Common](https://github.com/bradleydonmorris/Common) \ GitHelps
 
-To create the **repo** function, add the following line to **C:\Users\\%username%\AppData\Local\Programs\Git\etc\profile**.
+To create the **repo** function, add the contents of [**RepositoryBashFunctions.sh**](https://github.com/bradleydonmorris/Common/blob/master/RepositoryBashFunctions.sh) to **C:\Users\\%username%\AppData\Local\Programs\Git\etc\profile**.
 
-```shell
-source /c/Users/$(whoami)/source/repos/bradleydonmorris/Common/GitHelps/RepositoryBashFunctions.sh
-```
-
-Some of the commands in the **repo** function utilize the **.paths** file outlined below.
+Some of these commands utilize the **.paths** file outlined below.
 1. **`repo open bdmj`**: opens the repo directory specified in the **.paths** file with the provided alias. (bdmj in this case.)
 2. **`repo list`**: lists the contents of the **.paths** file formatted for display.
 3. **`repo add myRepo`**: adds the current directory to the **.paths** with the provided alias. (myRepo in this case)
