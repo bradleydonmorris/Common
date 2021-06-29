@@ -1,23 +1,23 @@
 #!/bin/bash
 
 repo() {
-	showUsage="false"
+	showUsage="true"
 	if [ $# -lt 1 ]
 	then
-		showUsage="false"
+		showUsage="true"
 	else
 		if [ $1 == "help" ]
 		then
-			showUsage="false"
+			showUsage="true"
 		elif [ $1 == "open" ]
 		then
-			showUsage="true"
+			showUsage="false"
 			repopath=$(awk -v FS="$2=" 'NF>1{print $2}' /c/Users/$(whoami)/source/repos/.paths)
 			cd $repopath
 		fi
 		if [ $1 == "add" ]
 		then
-			showUsage="true"
+			showUsage="false"
 			repopath=$(awk -v fs="$2=" 'nf>1{print $2}' /c/users/$(whoami)/source/repos/.paths)
 			if [ -z "${repopath}" ]
 			then
@@ -29,16 +29,18 @@ repo() {
 		fi
 		if [ $1 == "list" ]
 		then
-			showUsage="true"
+			showUsage="false"
+			echo
+			echo '---REPO DIRECTORY LIST---------------------------------------------------------------------------'
 			echo 'Name       Path'
 			echo '---------  --------------------------------------------------------------------------------------'
-			namepad='           '
+			namePad='           '
 			while IFS="" read -r line || [ -n "$line" ]
 			do
-				readarray -d = -t lineary <<<"$line"
-				name=${lineary[0]}
-				value=${lineary[1]}
-				printf '%s%s%s' "$name" "${namepad:${#name}}" "$value"
+				readarray -d = -t lineArray <<<"$line"
+				name=${lineArray[0]}
+				value=${lineArray[1]}
+				printf '%s%s%s' "$name" "${namePad:${#name}}" "$value"
 			done < /c/Users/$(whoami)/source/repos/.paths
 			echo '---------  --------------------------------------------------------------------------------------'
 			echo
@@ -47,10 +49,27 @@ repo() {
 			echo
 			echo 'To add the current directory to .paths use the following:'
 			echo '  repo add {Name}'
+			echo
+			echo
+			echo '---REPO USER LIST--------------------------------------------------------------------------------'
+			echo 'Name       User Name,User Email'
+			echo '---------  --------------------------------------------------------------------------------------'
+			while IFS="" read -r line || [ -n "$line" ]
+			do
+				readarray -d = -t lineArray <<<"$line"
+				name=${lineArray[0]}
+				value=${lineArray[1]}
+				printf '%s%s%s' "$name" "${namePad:${#name}}" "$value"
+				#"$gitUserEmail"
+			done < /c/Users/$(whoami)/source/repos/.users
+			echo '---------  ---------------------  ---------------------------------------------------------------'
+			echo
+			echo 'To set user for the current directory use the following:'
+			echo '  repo user {Name}'
 		fi
 		if [ $1 == "vs" ]
 		then
-			showUsage="true"
+			showUsage="false"
 			devenv="/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/Common7/IDE/devenv.exe"
 			solfile=${PWD##*/}".sln"
 			if [ -f $solfile ]
@@ -62,14 +81,14 @@ repo() {
 		fi
 		if [ $1 == "iis" ]
 		then
-			showUsage="true"
+			showUsage="false"
 			iispath="/c/Program Files/IIS Express/iisexpress.exe"
 			siteName=${PWD##*/} 
 			"$iispath" -site:$siteName &
 		fi
 		if [ $1 == "cap" ]
 		then
-			showUsage="true"
+			showUsage="false"
 			commitMessage=$2
 			changeCount=$(git status --porcelain=v1 | wc -l)
 			if [ "$changeCount" != "0" ]
@@ -87,36 +106,49 @@ repo() {
 		fi
 		if [ $1 == "graph" ]
 		then
-			showUsage="true"
+			showUsage="false"
 			git log --graph --full-history -10 --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
 		fi
+		if [ $1 == "user" ]
+		then
+			showUsage="false"
+			gitUserNameEmail=$(awk -v FS="$2=" 'NF>1{print $2}' /c/Users/$(whoami)/source/repos/.users)
+			readarray -d , -t gitUserArray <<<"$gitUserNameEmail"
+			gitUserName="${gitUserArray[0]}"
+			gitUserEmail="${gitUserArray[1]}"
+			git config --local user.name "$gitUserName"
+			git config --local user.email "$gitUserEmail"
+		fi
 	fi
-	if [ $showUsage == "false" ]
+	if [ $showUsage == "true" ]
 	then
 		echo
-		echo '***REPO FUNCTIONS USAGE*********************************************'
-		echo '*                                                                  *'
-		echo '*  List the directories in .paths.                                 *'
-		echo '*    repo list                                                     *'
-		echo '*                                                                  *'
-		echo '*  Chanage to a repo directory listed in .paths.                   *'
-		echo '*    repo open {Name}                                              *'
-		echo '*                                                                  *'
-		echo '*  Add the current directory to .paths.                            *'
-		echo '*    repo add {Name}                                               *'
-		echo '*                                                                  *'
-		echo '*  Launch Visual Studio for the current directory.                 *'
-		echo '*    repo add {Name}                                               *'
-		echo '*                                                                  *'
-		echo '*  Launch IIS Express for the current directory.                   *'
-		echo '*    repo add {Name}                                               *'
-		echo '*                                                                  *'
-		echo '*  Commit and push the GIT repo in the current directory.          *'
-		echo '*    repo cap [Message]                                            *'
-		echo '*                                                                  *'
-		echo '*  Display commit graph of the GIT repo in the current directory.  *'
-		echo '*    repo graph                                                    *'
-		echo '*                                                                  *'
-		echo '********************************************************************'
+		echo '***REPO FUNCTIONS USAGE************************************************'
+		echo '*                                                                     *'
+		echo '*  List the directories in .paths.                                    *'
+		echo '*    repo list                                                        *'
+		echo '*                                                                     *'
+		echo '*  Chanage to a repo directory listed in .paths.                      *'
+		echo '*    repo open {Name}                                                 *'
+		echo '*                                                                     *'
+		echo '*  Add the current directory to .paths.                               *'
+		echo '*    repo add {Name}                                                  *'
+		echo '*                                                                     *'
+		echo '*  Set the GIT user for the current repo based on the list in .users. *'
+		echo '*    repo add {Name}                                                  *'
+		echo '*                                                                     *'
+		echo '*  Launch Visual Studio for the current directory.                    *'
+		echo '*    repo vs                                                          *'
+		echo '*                                                                     *'
+		echo '*  Launch IIS Express for the current directory.                      *'
+		echo '*    repo iis                                                         *'
+		echo '*                                                                     *'
+		echo '*  Commit and push the GIT repo in the current directory.             *'
+		echo '*    repo cap [Message]                                               *'
+		echo '*                                                                     *'
+		echo '*  Display commit graph of the GIT repo in the current directory.     *'
+		echo '*    repo graph                                                       *'
+		echo '*                                                                     *'
+		echo '***********************************************************************'
 	fi
 }

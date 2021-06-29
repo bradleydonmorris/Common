@@ -8,7 +8,7 @@ To create the **repo** function, add the following line to **C:\Users\\%username
 source /c/Users/$(whoami)/source/repos/bradleydonmorris/Common/GitHelps/RepositoryBashFunctions.sh
 ```
 
-Some of the commands in the **repo** function utilize the **.paths** file outlined below.
+Some of the commands in the **repo** function utilize the **.paths** and **.users** files outlined below.
 1. **`repo open ghbdm`**: opens the repo directory specified in the **.paths** file with the provided alias. (bdmj in this case.)
 2. **`repo list`**: lists the contents of the **.paths** file formatted for display.
 3. **`repo add myRepo`**: adds the current directory to the **.paths** with the provided alias. (myRepo in this case)
@@ -17,6 +17,7 @@ Some of the commands in the **repo** function utilize the **.paths** file outlin
 6. **`repo cap [message]`**: commits and pushes the current repository/directory. The message is optional. If not provided, one will be generated. This function is mainly used while on a dev or feature branch. It is not intended to be used for commit->merge->push type operations.
    _USE WITH CARE! WILL NOT SET UPSTREAM BRANCH! If you are on master/main locally and you **cap**, it will commit and push to master/main upstream._
 7. **`repo graph`**: displays simple graph history for the current repository/directory.
+8. **`repo user bdm`**: sets the GIT user for the current repository/directory based on data in **.users**.
 
 
 Sample **/c/Users/$(whoami)/source/repos/.paths** file contents. Adjust as needed.
@@ -26,4 +27,9 @@ bdmme=/c/Users/bradley.morris/source/repos/bradleydonmorris/BradleyDonMorris.me
 ghbdm=/c/Users/bradley.morris/source/repos/bradleydonmorris/bradleydonmorris
 jt=/c/Users/bradley.morris/source/repos/bradleydonmorris/JournalTemplate
 gitt=/c/Users/bradley.morris/source/repos/bradleydonmorris/GitTesting
+```
+
+Sample **/c/Users/$(whoami)/source/repos/.users** file contents. Adjust as needed.
+```shell
+bdm=Bradley Don Morris,bradleydonmorris@hotmail.com
 ```
