@@ -15,7 +15,7 @@ Some of the commands in the **repo** function utilize the **.paths** file outlin
 4. **`repo vs`**: opens Visual Studio. If a **.sln** file exists in the current directory named after the current directory, it will open that solution. Otherwise it will open the current directory as a folder in Visual Studio.
 5. **`repo iis`**: starts IIS Express server for the site defined in **C:\Users\\%username%\Documents\IISExpress\config\applicationhost.config** where the site name matches the current directory name.
 6. **`repo cap [message]`**: commits and pushes the current repository/directory. The message is optional. If not provided, one will be generated.
-(USE WITH CARE. WILL NOT SET UPSTREAM BRANCH!)
+USE WITH CARE! WILL NOT SET UPSTREAM BRANCH! If you are on master/main locally and you **cap**, it will commit and push to master/main upstream.
 7. **`repo graph`**: displays simple graph history for the current repository/directory.
 
 
