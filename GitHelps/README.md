@@ -9,7 +9,7 @@ source /c/Users/$(whoami)/source/repos/bradleydonmorris/Common/GitHelps/Reposito
 ```
 
 Some of the commands in the **repo** function utilize the **.paths** file outlined below.
-1. **`repo open bdmj`**: opens the repo directory specified in the **.paths** file with the provided alias. (bdmj in this case.)
+1. **`repo open ghbdm`**: opens the repo directory specified in the **.paths** file with the provided alias. (bdmj in this case.)
 2. **`repo list`**: lists the contents of the **.paths** file formatted for display.
 3. **`repo add myRepo`**: adds the current directory to the **.paths** with the provided alias. (myRepo in this case)
 4. **`repo vs`**: opens Visual Studio. If a **.sln** file exists in the current directory named after the current directory, it will open that solution. Otherwise it will open the current directory as a folder in Visual Studio.
