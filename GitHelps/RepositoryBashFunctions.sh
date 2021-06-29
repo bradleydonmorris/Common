@@ -112,43 +112,52 @@ repo() {
 		if [ $1 == "user" ]
 		then
 			showUsage="false"
-			gitUserNameEmail=$(awk -v FS="$2=" 'NF>1{print $2}' /c/Users/$(whoami)/source/repos/.users)
-			readarray -d , -t gitUserArray <<<"$gitUserNameEmail"
-			gitUserName="${gitUserArray[0]}"
-			gitUserEmail="${gitUserArray[1]}"
-			git config --local user.name "$gitUserName"
-			git config --local user.email "$gitUserEmail"
+			if [ $# -lt 2 ]
+			then
+				gitUserName=$(git config --local user.name)
+				gitUserEmail=$(git config --local user.Email)
+				echo "Current Settings:"
+				echo "  Git User Name: $gitUserEmail"
+				echo "  Git Email Name: $gitUserEmail"
+			else
+				gitUserNameEmail=$(awk -v FS="$2=" 'NF>1{print $2}' /c/Users/$(whoami)/source/repos/.users)
+				readarray -d , -t gitUserArray <<<"$gitUserNameEmail"
+				gitUserName="${gitUserArray[0]}"
+				gitUserEmail="${gitUserArray[1]}"
+				git config --local user.name "$gitUserName"
+				git config --local user.email "$gitUserEmail"
+			fi
 		fi
 	fi
 	if [ $showUsage == "true" ]
 	then
 		echo
-		echo '***REPO FUNCTIONS USAGE************************************************'
-		echo '*                                                                     *'
-		echo '*  List the directories in .paths.                                    *'
-		echo '*    repo list                                                        *'
-		echo '*                                                                     *'
-		echo '*  Chanage to a repo directory listed in .paths.                      *'
-		echo '*    repo open {Name}                                                 *'
-		echo '*                                                                     *'
-		echo '*  Add the current directory to .paths.                               *'
-		echo '*    repo add {Name}                                                  *'
-		echo '*                                                                     *'
-		echo '*  Set the GIT user for the current repo based on the list in .users. *'
-		echo '*    repo add {Name}                                                  *'
-		echo '*                                                                     *'
-		echo '*  Launch Visual Studio for the current directory.                    *'
-		echo '*    repo vs                                                          *'
-		echo '*                                                                     *'
-		echo '*  Launch IIS Express for the current directory.                      *'
-		echo '*    repo iis                                                         *'
-		echo '*                                                                     *'
-		echo '*  Commit and push the GIT repo in the current directory.             *'
-		echo '*    repo cap [Message]                                               *'
-		echo '*                                                                     *'
-		echo '*  Display commit graph of the GIT repo in the current directory.     *'
-		echo '*    repo graph                                                       *'
-		echo '*                                                                     *'
-		echo '***********************************************************************'
+		echo '***REPO FUNCTIONS USAGE********************************************************'
+		echo '*                                                                             *'
+		echo '*  List the directories in .paths.                                            *'
+		echo '*    repo list                                                                *'
+		echo '*                                                                             *'
+		echo '*  Chanage to a repo directory listed in .paths.                              *'
+		echo '*    repo open {Name}                                                         *'
+		echo '*                                                                             *'
+		echo '*  Add the current directory to .paths.                                       *'
+		echo '*    repo add {Name}                                                          *'
+		echo '*                                                                             *'
+		echo '*  Gets or set the GIT user for the current repo based on the list in .users. *'
+		echo '*    repo user {Name}                                                         *'
+		echo '*                                                                             *'
+		echo '*  Launch Visual Studio for the current directory.                            *'
+		echo '*    repo vs                                                                  *'
+		echo '*                                                                             *'
+		echo '*  Launch IIS Express for the current directory.                              *'
+		echo '*    repo iis                                                                 *'
+		echo '*                                                                             *'
+		echo '*  Commit and push the GIT repo in the current directory.                     *'
+		echo '*    repo cap [Message]                                                       *'
+		echo '*                                                                             *'
+		echo '*  Display commit graph of the GIT repo in the current directory.             *'
+		echo '*    repo graph                                                               *'
+		echo '*                                                                             *'
+		echo '*******************************************************************************'
 	fi
 }
