@@ -1,4 +1,5 @@
-﻿SELECT
+﻿
+SELECT
 	[schemas].[name] AS [SchemaName],
 	[tables].[name] AS [TableName],
 	[extended_properties_JournalTableType].[value] AS [Journal.TableType],
