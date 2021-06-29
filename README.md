@@ -11,6 +11,7 @@ Some of these commands utilize the **.paths** file outlined below.
 4. **`repo vs`**: opens Visual Studio. If a **.sln** file exists in the current directory named after the current directory, it will open that solution. Otherwise it will open the current directory.
 5. **`repo iis`**: starts IIS Express server for the site defined in **C:\Users\\%username%\Documents\IISExpress\config\applicationhost.config** where the site name matches the current directory name.
 6. **`repo cap [message]`**: commits and pushes the current repository/directory. The message is optional. If not provided, one will be generated.
+6. **`repo graph`**: displays simple graph history for the current repository/directory.
 
 
 Sample **/c/Users/$(whoami)/source/repos/.paths** file contents. Adjust as needed.
