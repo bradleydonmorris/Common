@@ -23,7 +23,7 @@ repo() {
 			if [ -z "${repopath}" ]
 			then
 				printf '%s=%s\n' $2 $PWD >> ~/source/repos/.paths
-				printf 'adding\n\t%s=%s' $2 $PWD
+				printf 'Adding Repo Alias\n\t%s=%s' $repoAlias $PWD
 			else
 				printf '"%s" is already in use!' $2
 			fi
@@ -143,6 +143,37 @@ repo() {
 				git config --global user.name "$gitUserName"
 				git config --global user.email "$gitUserEmail"
 			fi
+
+		elif [ $1 == "clone" ]
+		then
+			if [ $# -lt 5 ]
+			then
+				showUsage="true"
+			else
+				showUsage="false"
+				gitURL="$2"
+				gitDirectory=$3"/"$(basename $gitURL .git)
+				repoAlias="$4"
+				gitUserNameEmail=$(awk -v FS="$5=" 'NF>1{print $2}' ~/source/repos/.users)
+				readarray -d , -t gitUserArray <<<"$gitUserNameEmail"
+				gitUserName="${gitUserArray[0]}"
+				gitUserEmail="${gitUserArray[1]}"
+				git clone $gitURL $gitDirectory
+				cd "$gitDirectory"
+				echo "Setting GIT User:"
+				echo "  Git User Name: $gitUserName"
+				echo "  Git Email Name: $gitUserEmail"
+				git config --local user.name "$gitUserName"
+				git config --local user.email "$gitUserEmail"
+				repopath=$(awk -v fs="$2=" 'nf>1{print $2}' ~/source/repos/.paths)
+				if [ -z "${repopath}" ]
+				then
+					printf '%s=%s\n' $repoAlias $PWD >> ~/source/repos/.paths
+					printf 'Adding Repo Alias\n\t%s=%s' $repoAlias $PWD
+				else
+					printf '"%s" is already in use!' $repoAlias
+				fi
+			fi
 		elif [ $1 == "allusers" ]
 		then
 			showUsage="false"
@@ -199,6 +230,10 @@ repo() {
 		echo '*                                                                             *'
 		echo '*  Display commit graph of the GIT repo in the current directory.             *'
 		echo '*    repo graph                                                               *'
+		echo '*                                                                             *'
+		echo '*  Clone a GIT repo and set it up for use with the "repo" functions.          *'
+		echo '*  (All arguments are required.)                                              *'
+		echo '*    repo clone {URL} {org} {alias} {user}                                    *'
 		echo '*                                                                             *'
 		echo '*******************************************************************************'
 	fi
