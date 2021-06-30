@@ -143,7 +143,6 @@ repo() {
 				git config --global user.name "$gitUserName"
 				git config --global user.email "$gitUserEmail"
 			fi
-
 		elif [ $1 == "clone" ]
 		then
 			if [ $# -lt 5 ]
@@ -152,20 +151,25 @@ repo() {
 			else
 				showUsage="false"
 				gitURL="$2"
-				gitDirectory="~/source/repos/"$3"/"$(basename $gitURL .git)
-				repoAlias="$4"
+				gitRepoName=$(basename $gitURL .git)
+				gitDirectory="$HOME/source/repos/"$3"/"
+				cd "$gitDirectory"
+				git clone $gitURL $gitRepoName
+				gitDirectory="$HOME/source/repos/"$3"/"$gitRepoName
+				cd "$gitDirectory"
+
 				gitUserNameEmail=$(awk -v FS="$5=" 'NF>1{print $2}' ~/source/repos/.users)
 				readarray -d , -t gitUserArray <<<"$gitUserNameEmail"
 				gitUserName="${gitUserArray[0]}"
 				gitUserEmail="${gitUserArray[1]}"
-				git clone $gitURL $gitDirectory
-				cd "$gitDirectory"
 				echo "Setting GIT User:"
 				echo "  Git User Name: $gitUserName"
 				echo "  Git Email Name: $gitUserEmail"
 				git config --local user.name "$gitUserName"
 				git config --local user.email "$gitUserEmail"
-				repopath=$(awk -v fs="$2=" 'nf>1{print $2}' ~/source/repos/.paths)
+
+				repoAlias="$4"
+				repopath=$(awk -v fs="$repoAlias=" 'nf>1{print $2}' ~/source/repos/.paths)
 				if [ -z "${repopath}" ]
 				then
 					printf '%s=%s\n' $repoAlias $PWD >> ~/source/repos/.paths
