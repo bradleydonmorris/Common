@@ -152,7 +152,7 @@ repo() {
 			else
 				showUsage="false"
 				gitURL="$2"
-				gitDirectory=$3"/"$(basename $gitURL .git)
+				gitDirectory="~/source/repos/"$3"/"$(basename $gitURL .git)
 				repoAlias="$4"
 				gitUserNameEmail=$(awk -v FS="$5=" 'NF>1{print $2}' ~/source/repos/.users)
 				readarray -d , -t gitUserArray <<<"$gitUserNameEmail"
