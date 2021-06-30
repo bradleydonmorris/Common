@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#/c/Users/$(whoami)
+
 repo() {
 	showUsage="true"
 	if [ $# -lt 1 ]
@@ -12,22 +14,20 @@ repo() {
 		elif [ $1 == "open" ]
 		then
 			showUsage="false"
-			repopath=$(awk -v FS="$2=" 'NF>1{print $2}' /c/Users/$(whoami)/source/repos/.paths)
+			repopath=$(awk -v FS="$2=" 'NF>1{print $2}' ~/source/repos/.paths)
 			cd $repopath
-		fi
-		if [ $1 == "add" ]
+		elif [ $1 == "add" ]
 		then
 			showUsage="false"
-			repopath=$(awk -v fs="$2=" 'nf>1{print $2}' /c/users/$(whoami)/source/repos/.paths)
+			repopath=$(awk -v fs="$2=" 'nf>1{print $2}' ~/source/repos/.paths)
 			if [ -z "${repopath}" ]
 			then
-				printf '%s=%s\n' $2 $PWD >> /c/users/$(whoami)/source/repos/.paths
+				printf '%s=%s\n' $2 $PWD >> ~/source/repos/.paths
 				printf 'adding\n\t%s=%s' $2 $PWD
 			else
 				printf '"%s" is already in use!' $2
 			fi
-		fi
-		if [ $1 == "list" ]
+		elif [ $1 == "list" ]
 		then
 			showUsage="false"
 			echo
@@ -41,7 +41,7 @@ repo() {
 				name=${lineArray[0]}
 				value=${lineArray[1]}
 				printf '%s%s%s' "$name" "${namePad:${#name}}" "$value"
-			done < /c/Users/$(whoami)/source/repos/.paths
+			done < ~/source/repos/.paths
 			echo '---------  --------------------------------------------------------------------------------------'
 			echo
 			echo 'To chanage to a repo directory use the following:'
@@ -61,13 +61,15 @@ repo() {
 				value=${lineArray[1]}
 				printf '%s%s%s' "$name" "${namePad:${#name}}" "$value"
 				#"$gitUserEmail"
-			done < /c/Users/$(whoami)/source/repos/.users
+			done < ~/source/repos/.users
 			echo '---------  ---------------------  ---------------------------------------------------------------'
 			echo
 			echo 'To set user for the current directory use the following:'
 			echo '  repo user {Name}'
-		fi
-		if [ $1 == "vs" ]
+			echo
+			echo 'To see all users for for all defined repos use the following:'
+			echo '  repo allusers'
+		elif [ $1 == "vs" ]
 		then
 			showUsage="false"
 			devenv="/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/Common7/IDE/devenv.exe"
@@ -78,15 +80,13 @@ repo() {
 			else
 				"$devenv" "${PWD}" &
 			fi
-		fi
-		if [ $1 == "iis" ]
+		elif [ $1 == "iis" ]
 		then
 			showUsage="false"
 			iispath="/c/Program Files/IIS Express/iisexpress.exe"
 			siteName=${PWD##*/} 
 			"$iispath" -site:$siteName &
-		fi
-		if [ $1 == "cap" ]
+		elif [ $1 == "cap" ]
 		then
 			showUsage="false"
 			commitMessage=$2
@@ -103,13 +103,11 @@ repo() {
 			else
 				echo "No changes found."
 			fi
-		fi
-		if [ $1 == "graph" ]
+		elif [ $1 == "graph" ]
 		then
 			showUsage="false"
 			git log --graph --full-history -10 --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
-		fi
-		if [ $1 == "user" ]
+		elif [ $1 == "user" ]
 		then
 			showUsage="false"
 			if [ $# -lt 2 ]
@@ -117,16 +115,60 @@ repo() {
 				gitUserName=$(git config --local user.name)
 				gitUserEmail=$(git config --local user.Email)
 				echo "Current Settings:"
-				echo "  Git User Name: $gitUserEmail"
+				echo "  Git User Name: $gitUserName"
 				echo "  Git Email Name: $gitUserEmail"
 			else
-				gitUserNameEmail=$(awk -v FS="$2=" 'NF>1{print $2}' /c/Users/$(whoami)/source/repos/.users)
+				gitUserNameEmail=$(awk -v FS="$2=" 'NF>1{print $2}' ~/source/repos/.users)
 				readarray -d , -t gitUserArray <<<"$gitUserNameEmail"
 				gitUserName="${gitUserArray[0]}"
 				gitUserEmail="${gitUserArray[1]}"
 				git config --local user.name "$gitUserName"
 				git config --local user.email "$gitUserEmail"
 			fi
+		elif [ $1 == "globaluser" ]
+		then
+			showUsage="false"
+			if [ $# -lt 2 ]
+			then
+				gitUserName=$(git config --global user.name)
+				gitUserEmail=$(git config --global user.Email)
+				echo "Current Settings:"
+				echo "  Git User Name: $gitUserName"
+				echo "  Git Email Name: $gitUserEmail"
+			else
+				gitUserNameEmail=$(awk -v FS="$2=" 'NF>1{print $2}' ~/source/repos/.users)
+				readarray -d , -t gitUserArray <<<"$gitUserNameEmail"
+				gitUserName="${gitUserArray[0]}"
+				gitUserEmail="${gitUserArray[1]}"
+				git config --global user.name "$gitUserName"
+				git config --global user.email "$gitUserEmail"
+			fi
+		elif [ $1 == "allusers" ]
+		then
+			showUsage="false"
+			currentDir=$PWD
+			while IFS="" read -r line || [ -n "$line" ]
+			do
+				readarray -d = -t lineArray <<<"$line"
+				name=${lineArray[0]//[$'\t\r\n ']}
+				value=${lineArray[1]//[$'\t\r\n ']}
+				cd $value
+				gitUserName=$(git config --local user.name)
+				gitUserEmail=$(git config --local user.Email)
+				echo "Repo: $name"
+				echo "  Path: $value"
+				echo "  Git User Name: $gitUserName"
+				echo "  Git Email Name: $gitUserEmail"
+				echo
+			done < ~/source/repos/.paths
+			gitUserName=$(git config --global user.name)
+			gitUserEmail=$(git config --global user.Email)
+			echo "Global Setting:"
+			echo "  Git User Name: $gitUserName"
+			echo "  Git Email Name: $gitUserEmail"
+			cd $currentDir
+		else
+			showUsage="true"
 		fi
 	fi
 	if [ $showUsage == "true" ]

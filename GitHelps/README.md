@@ -17,7 +17,10 @@ Some of the commands in the **repo** function utilize the **.paths** and **.user
 6. **`repo cap [message]`**: commits and pushes the current repository/directory. The message is optional. If not provided, one will be generated. This function is mainly used while on a dev or feature branch. It is not intended to be used for commit->merge->push type operations.
    _USE WITH CARE! WILL NOT SET UPSTREAM BRANCH! If you are on master/main locally and you **cap**, it will commit and push to master/main upstream._
 7. **`repo graph`**: displays simple graph history for the current repository/directory.
-8. **`repo user bdm`**: sets the GIT user for the current repository/directory based on data in **.users**.
+8. **`repo user`**: gets the GIT user for the current repository/directory.
+9. **`repo user bdm`**: sets the GIT user for the current repository/directory based on data in **.users**.
+10. **`repo globaluser`**: gets the GIT global user.
+11. **`repo user bdm`**: sets the GIT global user based on data in **.users**.
 
 
 Sample **/c/Users/$(whoami)/source/repos/.paths** file contents. Adjust as needed.
