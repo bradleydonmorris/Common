@@ -87,6 +87,7 @@ repo-listuser() {
 	echo "  Git User Name: $gitUserName"
 	echo "  Git Email Name: $gitUserEmail"
 }
+
 repo-user(){
 	gitUserNameEmail=$(awk -v FS="$1=" 'NF>1{print $2}' $reposHomePath/.users)
 	readarray -d , -t gitUserArray <<<"$gitUserNameEmail"
@@ -106,6 +107,7 @@ repo-listglobaluser() {
 	echo "  Git User Name: $gitUserName"
 	echo "  Git Email Name: $gitUserEmail"
 }
+
 repo-globaluser(){
 	gitUserNameEmail=$(awk -v FS="$1=" 'NF>1{print $2}' $reposHomePath/.users)
 	readarray -d , -t gitUserArray <<<"$gitUserNameEmail"
