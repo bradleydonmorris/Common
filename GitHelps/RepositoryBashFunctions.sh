@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#/c/Users/$(whoami)
 repo-list(){
 	echo
 	echo '---REPO DIRECTORY LIST---------------------------------------------------------------------------'
