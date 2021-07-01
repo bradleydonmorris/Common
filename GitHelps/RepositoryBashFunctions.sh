@@ -118,15 +118,19 @@ repo-globaluser(){
 }
 
 repo-vs(){
-	showUsage="false"
 	devenv="/c/Program Files (x86)/Microsoft Visual Studio/2019/Professional/Common7/IDE/devenv.exe"
-	solfile=${PWD##*/}".sln"
-	if [ -f $solfile ]
+	repoDirName=${PWD##*/}
+	solfile=$(awk -v FS="$repoDirName=" 'NF>1{print $2}' $reposHomePath/.vspaths)
+	if [ ! -f "$solfile" ]
 	then
-		"$devenv" "${PWD}/${solfile}" &
-	else
-		"$devenv" "${PWD}" &
+		solfile=${PWD##*/}".sln"
 	fi
+	if [ ! -f "$solfile" ]
+	then
+		solfile=${PWD}
+	fi
+	echo "Opening $solfile"
+	"$devenv" "$solfile" &
 }
 
 repo-iis(){
