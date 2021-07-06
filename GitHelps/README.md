@@ -23,4 +23,7 @@ Some of the commands in the **repo** function utilize the **.paths** and **.user
 10. **`repo globaluser`**: gets the GIT global user.
 11. **`repo user bdm`**: sets the GIT global user based on data in **.users**.
 
-There are sample files for **.paths**, **.users**, **.vspaths**, and **.workspaces**. These files should be stored in the directory defined in **$reposHomePath** in the **RepositoryBashFunctions.sh** file.
+There are sample files for **[.paths](https://github.com/bradleydonmorris/Common/blob/master/GitHelps/.paths)**, **[.users](https://github.com/bradleydonmorris/Common/blob/master/GitHelps/.users)**, **[.vspaths](https://github.com/bradleydonmorris/Common/blob/master/GitHelps/.vspaths)**, and **[.workspaces](https://github.com/bradleydonmorris/Common/blob/master/GitHelps/.workspaces)**. These files should be stored in the directory defined in **$reposHomePath** in the **RepositoryBashFunctions.sh** file.
+
+
+
