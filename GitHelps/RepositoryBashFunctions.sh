@@ -206,6 +206,19 @@ repo-showusage() {
 	echo '*******************************************************************************'
 }
 
+repo-openws() {
+	currentDir=$PWD
+	workspace=$(awk -v FS="$1=" 'NF>1{print $2}' $reposHomePath/.workspaces)
+	IFS=,
+	for repoName in $workspace
+	do
+		repo-open $repoName
+		repo-vs
+	done
+	cd "$currentDir"
+	cd "$currentDir"
+}
+
 repo() {
 	reposHomePath="/c/Users/$(whoami)/source/repos"
 	if [ $# -lt 1 ]
