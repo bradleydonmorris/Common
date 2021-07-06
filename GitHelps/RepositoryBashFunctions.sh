@@ -233,7 +233,7 @@ repo() {
 			repo-open $2
 		elif [ $1 == "ws" ]
 		then
-			repo-openws $2
+			repo-ws $2
 		elif [ $1 == "add" ]
 		then
 			showUsage="false"
