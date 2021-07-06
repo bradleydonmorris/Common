@@ -9,7 +9,8 @@ source /c/Users/$(whoami)/source/repos/bradleydonmorris/Common/GitHelps/Reposito
 ```
 
 Some of the commands in the **repo** function utilize the **.paths** and **.users** files outlined below.
-1. **`repo open ghbdm`**: opens the repo directory specified in the **.paths** file with the provided alias. (bdmj in this case.)
+1. **`repo ws bdm`**: opens the workspace which defines all the Visual Studio solutions/folders to open. (bdm in this case.)
+1. **`repo open ghbdm`**: opens the repo directory specified in the **.paths** file with the provided alias. (ghbdm in this case.)
 2. **`repo list`**: lists the contents of the **.paths** file formatted for display.
 3. **`repo add myRepo`**: adds the current directory to the **.paths** with the provided alias. (myRepo in this case)
 4. **`repo vs`**: opens Visual Studio. If a **.sln** file exists in the current directory named after the current directory, it will open that solution. Otherwise it will open the current directory as a folder in Visual Studio.
@@ -22,17 +23,4 @@ Some of the commands in the **repo** function utilize the **.paths** and **.user
 10. **`repo globaluser`**: gets the GIT global user.
 11. **`repo user bdm`**: sets the GIT global user based on data in **.users**.
 
-
-Sample **/c/Users/$(whoami)/source/repos/.paths** file contents. Adjust as needed.
-```shell
-common=/c/Users/bradley.morris/source/repos/bradleydonmorris/Common
-bdmme=/c/Users/bradley.morris/source/repos/bradleydonmorris/BradleyDonMorris.me
-ghbdm=/c/Users/bradley.morris/source/repos/bradleydonmorris/bradleydonmorris
-jt=/c/Users/bradley.morris/source/repos/bradleydonmorris/JournalTemplate
-gitt=/c/Users/bradley.morris/source/repos/bradleydonmorris/GitTesting
-```
-
-Sample **/c/Users/$(whoami)/source/repos/.users** file contents. Adjust as needed.
-```shell
-bdm=Bradley Don Morris,bradleydonmorris@hotmail.com
-```
+There are sample files for **.paths**, **.users**, **.vspaths**, and **.workspaces**. These files should be stored in the directory defined in **$reposHomePath** in the **RepositoryBashFunctions.sh** file.

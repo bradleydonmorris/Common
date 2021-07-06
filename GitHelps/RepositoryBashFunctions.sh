@@ -1,4 +1,5 @@
 #!/bin/bash
+reposHomePath="/c/Users/$(whoami)/source/repos"
 
 repo-list(){
 	echo
@@ -206,7 +207,7 @@ repo-showusage() {
 	echo '*******************************************************************************'
 }
 
-repo-openws() {
+repo-ws() {
 	currentDir=$PWD
 	workspace=$(awk -v FS="$1=" 'NF>1{print $2}' $reposHomePath/.workspaces)
 	IFS=,
@@ -220,7 +221,6 @@ repo-openws() {
 }
 
 repo() {
-	reposHomePath="/c/Users/$(whoami)/source/repos"
 	if [ $# -lt 1 ]
 	then
 		repo-showusage
@@ -231,6 +231,9 @@ repo() {
 		elif [ $1 == "open" ]
 		then
 			repo-open $2
+		elif [ $1 == "ws" ]
+		then
+			repo-openws $2
 		elif [ $1 == "add" ]
 		then
 			showUsage="false"
