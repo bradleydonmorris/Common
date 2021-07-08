@@ -2,6 +2,23 @@
 
 [Common](https://github.com/bradleydonmorris/Common) \ [PowerShell](https://github.com/bradleydonmorris/Common/tree/master/PowerShell) \ Functions
 
+- iTextSharp
+  - Split-PDF
+  ```powershell
+  Split-PDF -MergedFilePath "C:\SomePDF.pdf" -FolderPath "C:\StickEmHere";
+  ```
+  - Merge-PDFs
+  ```powershell
+  Merge-PDFs -MergedFilePath "C:\MyNewFile.pdf" -FilePaths @(
+      "C:\SomePage1.pdf",
+      "C:\SomePage2.pdf",
+      "C:\SomePage3.pdf",
+      "C:\SomePage4.pdf",
+      "C:\SomePage5.pdf"
+  );
+  ```
+
+
 - RandomStringFunctions.ps1
   - Get-RandomPassword
   ```powershell
@@ -11,7 +28,7 @@
   - Get-RandomString
   ```powershell
   Get-RandomString -CharacterCount 32 -CharacterGroups Upper,Lower,Numbers,Special;
-  Get-RandomString -CharacterCount 32 -CharacterGroups Upper,Lower,Numbers 
+  Get-RandomString -CharacterCount 32 -CharacterGroups Upper,Lower,Numbers
   ```
   - Get-RandomBaseString
   ```powershell

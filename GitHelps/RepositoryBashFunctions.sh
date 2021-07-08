@@ -1,47 +1,11 @@
 #!/bin/bash
 reposHomePath="/c/Users/$(whoami)/source/repos"
 
-repo-list(){
-	echo
-	echo '---REPO DIRECTORY LIST---------------------------------------------------------------------------'
-	echo 'Name       Path'
-	echo '---------  --------------------------------------------------------------------------------------'
-	namePad='           '
-	while IFS="" read -r line || [ -n "$line" ]
-	do
-		readarray -d = -t lineArray <<<"$line"
-		name=${lineArray[0]}
-		value=${lineArray[1]}
-		printf '%s%s%s' "$name" "${namePad:${#name}}" "$value"
-	done < $reposHomePath/.paths
-	echo '---------  --------------------------------------------------------------------------------------'
-	echo
-	echo 'To chanage to a repo directory use the following:'
-	echo '  repo open {Name}'
-	echo
-	echo 'To add the current directory to .paths use the following:'
-	echo '  repo add {Name}'
-	echo
-	echo
-	echo '---REPO USER LIST--------------------------------------------------------------------------------'
-	echo 'Name       User Name,User Email'
-	echo '---------  --------------------------------------------------------------------------------------'
-	while IFS="" read -r line || [ -n "$line" ]
-	do
-		readarray -d = -t lineArray <<<"$line"
-		name=${lineArray[0]}
-		value=${lineArray[1]}
-		printf '%s%s%s' "$name" "${namePad:${#name}}" "$value"
-	done < $reposHomePath/.users
-	echo '---------  ---------------------  ---------------------------------------------------------------'
-	echo
-	echo 'To set user for the current directory use the following:'
-	echo '  repo user {Name}'
-	echo
-	echo 'To see all users for for all defined repos use the following:'
-	echo '  repo allusers'
-
+repo-list() {
 	currentDir=$PWD
+	echo
+	echo '***REPOSITORIES****************************************************************'
+	echo
 	while IFS="" read -r line || [ -n "$line" ]
 	do
 		readarray -d = -t lineArray <<<"$line"
@@ -50,18 +14,27 @@ repo-list(){
 		cd $value
 		gitUserName=$(git config --local user.name)
 		gitUserEmail=$(git config --local user.Email)
+		echo '*******************************************************************************'
 		echo "Repo: $name"
 		echo "  Path: $value"
 		echo "  Git User Name: $gitUserName"
 		echo "  Git Email Name: $gitUserEmail"
+		repoDirName=${PWD##*/}
+		solfile=$(awk -v FS="$repoDirName=" 'NF>1{print $2}' $reposHomePath/.vspaths)
+		if [ ! -f "$solfile" ]
+		then
+			solfile=${PWD##*/}".sln"
+		fi
+		if [ ! -f "$solfile" ]
+		then
+			solfile=${PWD}
+		fi
+		echo "  VS Path: $solfile"
+		echo '*******************************************************************************'
 		echo
 	done < $reposHomePath/.paths
-	gitUserName=$(git config --global user.name)
-	gitUserEmail=$(git config --global user.Email)
-	echo "Global Setting:"
-	echo "  Git User Name: $gitUserName"
-	echo "  Git Email Name: $gitUserEmail"
-	cd $currentDir
+	echo
+	cd "$currentDir"
 }
 
 repo-open(){
