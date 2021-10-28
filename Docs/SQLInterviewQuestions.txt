@@ -1,0 +1,24 @@
+What keywords are in SQL server 2016+ that allow interacting with JSON data?
+In regards to performance, What is the one main advantage of a stored procedure over over dynamic SQL in app code?
+Why is a stored procedure likely more performant?
+What is the difference between TRUNCATE and DELETE
+What is one way to convert rows to columns in a query?
+What is the difference between ROW_NUMBER, RANK and DENSE_RANK
+
+What is the difference between clustered and non-clustered indexes?
+Can you provide a couple of reasons why the clustered index should be kept small?
+Can you define a situation in which a table may need a non-clustered index without having a clustered index?
+Can you describe the difference between a JOIN and an APPLY?
+
+If you were asked to store a date time in a databse table, what would be your prefered time zone 
+If you are asked to data that includes date, time, and time zone components, what data type would you choose?
+What SQL Data type supports timezones?
+What are couple of commands that can be used to change timimezones?
+What is the difference between SWITCHOFF and AT TIMEZONE?
+
+What time of CRUD operations are permitted against tables in a user defined functions?
+Which errors can't be trapped in a TRY/CATCH?
+What are the differences between AFTER and INSTEAD OF triggers?
+What is the difference between UNION and UNION ALL
+What might be one reason to ensure every table has an identity field?
+What is the difference between prime and non-prime attributes?

@@ -26,7 +26,6 @@ Function Dev-SetGitDirsHidden()
     }
 }
 
-
 Function Dev-NewBlankSolution()
 {
     Param
@@ -72,4 +71,23 @@ EndGlobal
     }
     Write-Host -Object $("Creating " + $Name);
     Set-Content -Path $FilePath -Value $Contents;
+}
+
+Function Dev-CAP()
+{
+    [String] $CommitMessage = [DateTime]::UtcNow.ToString("yyyy-MM-dd HH:mm:ss.fffffffK") + " (" + $env:USERNAME + ") - {@Action}";
+    [String] $Output = git status --porcelain=v1 | Out-String;
+    If ($Output.Length -gt 0)
+    {
+        $CommitMessage = $CommitMessage.Replace("{@Action}", "Commit and Push (CAP.ps1)");
+        Write-Host -Object $CommitMessage;
+        Write-Host -Object $Output;
+        git add . *>$null;
+        git commit --message $CommitMessage *>$null;
+        git push origin -q *>$null
+    }
+    Else
+    {
+	    Write-Host -Object "Nothing to Commit and Push";
+    }
 }
