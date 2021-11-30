@@ -1,3 +1,8 @@
+#####
+WinGet for DbSchema not complete yet.
+https://dbschema.com/download/DbSchema_8_4_5.exe
+#####
+
 winget install -e --id Microsoft.GitCredentialManagerCore
 winget install -e --id Git.Git
 winget install -e --id GitHub.cli
@@ -23,4 +28,4 @@ winget install -e --id Microsoft.PowerToys
 winget install -e --id Docker.DockerDesktop
 winget install -e --id RaspberryPiFoundation.RaspberryPiImager
 winget install -e --id Postman.Postman
-winget install -e --id Adobe.AdobeAcrobatReaderDC
+winget install -e --id Adobe.Acrobat.Reader.64-bit
