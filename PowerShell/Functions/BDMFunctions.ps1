@@ -121,3 +121,34 @@ Function BDM-RepoStat()
     Add-Content -Path $Output -Value "( C) Copied      ( U) Updated    (??) Untracked    (!!) Ignored".PadLeft($RowLength, " ");
     Set-Location -Path $CurrentPath;
 }
+
+
+Function BDM-BuildFiles()
+{
+    Param
+    (
+        [Parameter(Mandatory=$true)]
+        [String] $Count,
+
+        [Parameter(Mandatory=$true)]
+        [String] $FilePathTemplate,
+
+        [Parameter(Mandatory=$false)]
+        [String] $ContentTemplate
+    )
+    [Int32] $ZeroPadding = $Count.ToString().Length;
+    If ($ContentTemplate -eq $null -or [String]::IsNullOrWhiteSpace($ContentTemplate))
+    {
+        1..$Count | ForEach-Object -Process {
+            Set-Content -Path $($FilePathTemplate.Replace("{@Number}", $_.ToString().PadLeft($ZeroPadding, "0"))) -Value $null;
+        }
+    }
+    Else
+    {
+        1..$Count | ForEach-Object -Process {
+            Set-Content `
+                -Path $($FilePathTemplate.Replace("{@Number}", $_.ToString().PadLeft($ZeroPadding, "0"))) `
+                -Value $($ContentTemplate.Replace("{@Number}", $_.ToString().PadLeft($ZeroPadding, "0")));
+        }
+    }
+}

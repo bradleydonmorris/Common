@@ -1,31 +1,46 @@
 #####
-WinGet for DbSchema not complete yet.
-https://dbschema.com/download/DbSchema_8_4_5.exe
+WinGet for some things not yet ready.
+
+Set-Location -Path "$HOME\Downloads";
+Invoke-WebRequest -Uri https://github.com/git-for-windows/git/releases/download/v2.34.1.windows.1/Git-2.34.1-64-bit.exe -OutFile .\Git-2.34.1-64-bit.exe;
+Invoke-WebRequest -Uri https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.msvc2015-win64.exe -OutFile .\wkhtmltox-0.12.6-1.msvc2015-win64.exe;
+Invoke-WebRequest -Uri https://dbschema.com/download/DbSchema_8_4_5.exe -OutFile .\DbSchema_8_4_5.exe;
 #####
+
+winget install -e --id 7zip.7zip
 
 winget install -e --id Microsoft.GitCredentialManagerCore
 winget install -e --id Git.Git
 winget install -e --id GitHub.cli
 winget install -e --id GitHub.GitHubDesktop
 winget install -e --id GitHub.GitLFS
+
 winget install -e --id Microsoft.PowerShell
 winget install -e --id Microsoft.VisualStudioCode
 winget install -e --id Microsoft.SQLServerManagementStudio
 winget install -e --id Microsoft.RemoteDesktopClient
-winget install -e --id BraveSoftware.BraveBrowser
-winget install -e --id Notepad++.Notepad++
-winget install -e --id TimKosse.FileZilla.Client
-winget install -e --id WereTurtle.Ghostwriter
+
 winget install -e --id dbeaver.dbeaver
 winget install -e --id MongoDB.DatabaseTools
 winget install -e --id OpenJS.NodeJS
+
+winget install -e --id Notepad++.Notepad++
+winget install -e --id PuTTY
+winget install -e --id TimKosse.FileZilla.Client
+winget install -e --id Postman.Postman
+winget install -e --id Docker.DockerDesktop
+winget install -e --id RaspberryPiFoundation.RaspberryPiImager
+
+winget install -e --id BraveSoftware.BraveBrowser
+winget install -e --id WereTurtle.Ghostwriter
 winget install -e --id SlackTechnologies.Slack
 winget install -e --id TechSmith.Snagit
 winget install -e --id Obsidian.Obsidian
 winget install -e --id WereTurtle.Ghostwriter
-winget install -e --id 7zip.7zip
+
 winget install -e --id Microsoft.PowerToys
-winget install -e --id Docker.DockerDesktop
-winget install -e --id RaspberryPiFoundation.RaspberryPiImager
-winget install -e --id Postman.Postman
 winget install -e --id Adobe.Acrobat.Reader.64-bit
+winget install -e --id JohnMacFarlane.Pandoc
+
+
+
