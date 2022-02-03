@@ -15,7 +15,6 @@ Install-Package Markdig
 
 #>
 
-#Add-Type -Path ([IO.Path]::Combine($HOME, "source\repos\bradleydonmorris\Common\PowerShell\Functions\libs\Markdig.dll"));
 Add-Type -Path ([IO.Path]::Combine($HOME, "source\repos\bradleydonmorris\Common\PowerShell\Functions\libs\Markdig.0.26.0\lib\net452\Markdig.dll"));
 
 Function Convert-MDToHTML()

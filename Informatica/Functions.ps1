@@ -100,7 +100,7 @@ Function ICS-Connection-Export()
 
 Function Main()
 {
-    [System.Object[]] $ICSSession = ICS-LogIn -UserName "bradleymorris@matrixservice.com" -Password "turtlefish";
+    [System.Object[]] $ICSSession = ICS-LogIn -UserName "bradleymorris@matrixservice.com" -Password "XXXXSETPASSWORDXXX";
     [System.String] $ConnectionsFilePath = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($PSCommandPath), "Connections.txt")
     ICS-Connection-Export -Session $ICSSession -ExportFilePath $ConnectionsFilePath
 

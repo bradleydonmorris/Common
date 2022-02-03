@@ -9,7 +9,7 @@ SELECT
 			ON [sql_modules].[object_id] = [objects].[object_id]
 		INNER JOIN [{@DatabaseName}].[sys].[schemas]
 			ON [objects].[schema_id] = [schemas].[schema_id]
-	WHERE [sql_modules].[definition] LIKE ''%t_process_request_response%''
+	WHERE [sql_modules].[definition] LIKE ''%{STRING TO FIND}%''
 '
 
 DECLARE @DatabaseName [sys].[sysname]
