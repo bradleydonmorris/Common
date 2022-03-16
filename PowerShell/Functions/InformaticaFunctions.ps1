@@ -35,7 +35,7 @@ Function ICS-LogIn()
     [System.Collections.Hashtable] $ReturnValue = @{};
     [void] $ReturnValue.Add("Headers", @{});
     [void] $ReturnValue.Add("URLs", @{});
-    [void] $ReturnValue.URLs.Add("LogIn", "https://app.informaticaondemand.com/ma/api/v2/user/login");
+    [void] $ReturnValue.URLs.Add("LogIn", "https://dm-us.informaticacloud.com/ma/api/v2/user/login");
     [void] $ReturnValue.Headers.Add("Content-Type", "application/json");
     [void] $ReturnValue.Headers.Add("Accept", "application/json");
     [System.String] $Body = "{`"@type`": `"login`",`"username`": `"{@UserName}`",`"password`":`"{@Password}`"}";
@@ -97,20 +97,3 @@ Function ICS-Connection-Export()
         }
     }
 }
-
-Function Main()
-{
-    [System.Object[]] $ICSSession = ICS-LogIn -UserName "bradleymorris@matrixservice.com" -Password "XXXXSETPASSWORDXXX";
-    [System.String] $ConnectionsFilePath = [System.IO.Path]::Combine([System.IO.Path]::GetDirectoryName($PSCommandPath), "Connections.txt")
-    ICS-Connection-Export -Session $ICSSession -ExportFilePath $ConnectionsFilePath
-
-    #ICS-Task -Session $ICSSession -Type WORKFLOW;
-
-    #ICS-ActivityLog-Export -Session $ICSSession -ExportFilePath $TempCSVPath;
-    #ICS-User-Export -Session $ICSSession -ExportFilePath $TempCSVPath;
-    #ICS-LogOut -Session $ICSSession;
-    Write-Host -Object $ConnectionsFilePath;
-}
-
-Clear-Host;
-Main;

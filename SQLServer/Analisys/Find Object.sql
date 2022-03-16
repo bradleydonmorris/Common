@@ -9,7 +9,7 @@ N'
 		FROM [{@Database}].[sys].[schemas]
 			INNER JOIN [{@Database}].[sys].[objects]
 				ON [schemas].[schema_id] = [objects].[schema_id]
-		WHERE [objects].[name] LIKE ''%{OBJECT NAME}%''
+		WHERE [objects].[name] LIKE ''%reservation%''
 '
 DECLARE @Object TABLE
 (
@@ -18,7 +18,7 @@ DECLARE @Object TABLE
 	[Object] [sys].[sysname],
 	[Type] [sys].[sysname]
 )
-DECLARE @SQL [nvarchar](MAX)
+DECLARE @SQL [nvarchar](MAX) 
 DECLARE @Database [sys].[sysname]
 DECLARE _Database
 	CURSOR LOCAL FORWARD_ONLY READ_ONLY FOR
