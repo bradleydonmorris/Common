@@ -8,22 +8,29 @@ Function Invoke-SqlcmdScalarLongString()
                 Position=1,
                 HelpMessage="SQL Server instance name")]
         [ValidateNotNullOrEmpty()]
-        [SupportsWildcards()]
         [String] $ServerInstance,
 
         [Parameter(Mandatory=$true,
-                Position=1,
+                Position=2,
                 HelpMessage="Database name")]
         [ValidateNotNullOrEmpty()]
-        [SupportsWildcards()]
         [String] $Database,
 
         [Parameter(Mandatory=$true,
-                Position=1,
+                Position=3,
                 HelpMessage="Path to SQL query file (*.sql)")]
         [ValidateNotNullOrEmpty()]
-        [SupportsWildcards()]
-        [String] $InputFile
+        [String] $InputFile,
+
+        [Parameter(Mandatory=$false,
+                Position=4,
+                HelpMessage="(Optional) Path to file where results will be saved")]
+        [String] $OutputFile,
+
+        [Parameter(Mandatory=$false,
+                Position=5,
+                HelpMessage="(Optional) Indicates if resulting string should be pretty formatted as json")]
+        [switch] $FormatAsJson
     )
     [String] $ReturnValue = $null;
     [System.Data.SqlClient.SqlCommand] $SqlCommand = [System.Data.SqlClient.SqlCommand]::new();
@@ -43,5 +50,17 @@ Function Invoke-SqlcmdScalarLongString()
         [void] $SqlCommand.Connection.Close();
     }
     [void] $SqlCommand.Dispose();
-    Return $ReturnValue;
+    if ($FormatAsJson)
+    {
+        $discarded = ConvertFrom-Json -InputObject $ReturnValue;
+        $ReturnValue = ConvertTo-Json -InputObject $discarded -Depth 100;
+    }
+    If (![String]::IsNullOrEmpty($OutputFile))
+    {
+        [System.IO.File]::WriteAllText($OutputFile, $ReturnValue);
+    }
+    Else
+    {
+        Return $ReturnValue;
+    }
 }
