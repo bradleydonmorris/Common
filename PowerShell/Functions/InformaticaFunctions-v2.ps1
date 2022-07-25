@@ -62,10 +62,17 @@ Function Get-IICSv2Connections()
     Param
     (
         [Parameter(Mandatory=$true)]
-        [System.Object[]] $Session
+        [System.Object[]] $Session,
+
+        [Parameter(Mandatory=$false)]
+        [System.String] $Output
     )
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     $Response = Invoke-WebRequest -Uri $Session.URLs.Connection -Headers $Session.Headers -Method Get;
+    If (![String]::IsNullOrEmpty($Output))
+    {
+        [IO.File]::WriteAllText($Output, $Response.Content);
+    }
     Return $Response.Content;
 }
 Function Get-IICSv2Connection()
@@ -76,10 +83,17 @@ Function Get-IICSv2Connection()
         [System.Object[]] $Session,
 
         [Parameter(Mandatory=$true)]
-        [System.String] $Id
+        [System.String] $Id,
+
+        [Parameter(Mandatory=$false)]
+        [System.String] $Output
     )
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     $Response = Invoke-WebRequest -Uri ($Session.URLs.Connection + "/" + $Id) -Headers $Session.Headers -Method Get;
+    If (![String]::IsNullOrEmpty($Output))
+    {
+        [IO.File]::WriteAllText($Output, $Response.Content);
+    }
     Return $Response.Content;
 }
 Function Get-IICSv2Mappings()
@@ -87,10 +101,17 @@ Function Get-IICSv2Mappings()
     Param
     (
         [Parameter(Mandatory=$true)]
-        [System.Object[]] $Session
+        [System.Object[]] $Session,
+
+        [Parameter(Mandatory=$false)]
+        [System.String] $Output
     )
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     $Response = Invoke-WebRequest -Uri $Session.URLs.Mapping -Headers $Session.Headers -Method Get;
+    If (![String]::IsNullOrEmpty($Output))
+    {
+        [IO.File]::WriteAllText($Output, $Response.Content);
+    }
     Return $Response.Content;
 }
 Function Get-IICSv2Mapping()
@@ -101,10 +122,17 @@ Function Get-IICSv2Mapping()
         [System.Object[]] $Session,
 
         [Parameter(Mandatory=$true)]
-        [System.String] $Id
+        [System.String] $Id,
+
+        [Parameter(Mandatory=$false)]
+        [System.String] $Output
     )
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     $Response = Invoke-WebRequest -Uri ($Session.URLs.Mapping + "/" + $Id) -Headers $Session.Headers -Method Get;
+    If (![String]::IsNullOrEmpty($Output))
+    {
+        [IO.File]::WriteAllText($Output, $Response.Content);
+    }
     Return $Response.Content;
 }
 Function Get-IICSv2MappingTasks()
@@ -112,10 +140,17 @@ Function Get-IICSv2MappingTasks()
     Param
     (
         [Parameter(Mandatory=$true)]
-        [System.Object[]] $Session
+        [System.Object[]] $Session,
+
+        [Parameter(Mandatory=$false)]
+        [System.String] $Output
     )
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     $Response = Invoke-WebRequest -Uri $Session.URLs.MappingTask -Headers $Session.Headers -Method Get;
+    If (![String]::IsNullOrEmpty($Output))
+    {
+        [IO.File]::WriteAllText($Output, $Response.Content);
+    }
     Return $Response.Content;
 }
 
@@ -127,10 +162,17 @@ Function Get-IICSv2MappingTask()
         [System.Object[]] $Session,
 
         [Parameter(Mandatory=$true)]
-        [System.String] $Id
+        [System.String] $Id,
+
+        [Parameter(Mandatory=$false)]
+        [System.String] $Output
     )
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     $Response = Invoke-WebRequest -Uri ($Session.URLs.MappingTask + "/" + $Id) -Headers $Session.Headers -Method Get;
+    If (![String]::IsNullOrEmpty($Output))
+    {
+        [IO.File]::WriteAllText($Output, $Response.Content);
+    }
     Return $Response.Content;
 }
 
@@ -139,10 +181,17 @@ Function Get-IICSv2Workflows()
     Param
     (
         [Parameter(Mandatory=$true)]
-        [System.Object[]] $Session
+        [System.Object[]] $Session,
+
+        [Parameter(Mandatory=$false)]
+        [System.String] $Output
     )
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     $Response = Invoke-WebRequest -Uri $Session.URLs.Workflow -Headers $Session.Headers -Method Get;
+    If (![String]::IsNullOrEmpty($Output))
+    {
+        [IO.File]::WriteAllText($Output, $Response.Content);
+    }
     Return $Response.Content;
 }
 
@@ -154,10 +203,17 @@ Function Get-IICSv2Workflow()
         [System.Object[]] $Session,
 
         [Parameter(Mandatory=$true)]
-        [System.String] $Id
+        [System.String] $Id,
+
+        [Parameter(Mandatory=$false)]
+        [System.String] $Output
     )
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     $Response = Invoke-WebRequest -Uri ($Session.URLs.Workflow + "/" + $Id) -Headers $Session.Headers -Method Get;
+    If (![String]::IsNullOrEmpty($Output))
+    {
+        [IO.File]::WriteAllText($Output, $Response.Content);
+    }
     Return $Response.Content;
 }
 
@@ -166,10 +222,17 @@ Function Get-IICSv2Schedules()
     Param
     (
         [Parameter(Mandatory=$true)]
-        [System.Object[]] $Session
+        [System.Object[]] $Session,
+
+        [Parameter(Mandatory=$false)]
+        [System.String] $Output
     )
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     $Response = Invoke-WebRequest -Uri $Session.URLs.Schedule -Headers $Session.Headers -Method Get;
+    If (![String]::IsNullOrEmpty($Output))
+    {
+        [IO.File]::WriteAllText($Output, $Response.Content);
+    }
     Return $Response.Content;
 }
 
@@ -181,10 +244,17 @@ Function Get-IICSv2Schedule()
         [System.Object[]] $Session,
 
         [Parameter(Mandatory=$true)]
-        [System.String] $Id
+        [System.String] $Id,
+
+        [Parameter(Mandatory=$false)]
+        [System.String] $Output
     )
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     $Response = Invoke-WebRequest -Uri ($Session.URLs.Schedule + "/" + $Id) -Headers $Session.Headers -Method Get;
+    If (![String]::IsNullOrEmpty($Output))
+    {
+        [IO.File]::WriteAllText($Output, $Response.Content);
+    }
     Return $Response.Content;
 }
 
